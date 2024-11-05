@@ -20,7 +20,7 @@ public class ChatHub : Hub
         await Groups.AddToGroupAsync(Context.ConnectionId, conn.ChatRoom);
 
         _shared.connections[Context.ConnectionId] = conn;
-        
+
         await Clients.Group(conn.ChatRoom)
             .SendAsync("ReceiveSpecificMessage", "admin", $"{conn.UserName} joined {conn.ChatRoom} chatroom");
     }
@@ -33,4 +33,16 @@ public class ChatHub : Hub
                 .SendAsync("ReceiveSpecificMessage", conn.UserName, msg);
         }
     }
+
+    public async Task ShowAllUsers()
+    {
+        if (_shared.connections.TryGetValue(Context.ConnectionId, out UserConnection conn))
+        {
+            var users = _shared.connections.Select(x => x.Value.ChatRoom = conn.ChatRoom).ToList();
+            await Clients.Group(conn.ChatRoom)
+                .SendAsync("ShowAllUsers", users);
+        }
+    }
+    
+    
 }

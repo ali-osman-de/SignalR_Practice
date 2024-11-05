@@ -1,0 +1,14 @@
+.message-card {
+    margin: 10px 0;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.message-text {
+    margin-left: 10px; 
+}
